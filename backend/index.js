@@ -1,8 +1,11 @@
 import express from "express";
 import cors from "cors";
 import { createServer } from "http";
-import { connectDB } from "./utils/db";
-require("dotenv").config();
+import { connectDB } from "./utils/db.js";
+import { config } from "dotenv";
+import userRouter from "./routes/user.route.js";
+
+config();
 
 const PORT = process.env.PORT || 3000;
 
@@ -14,6 +17,8 @@ async function init() {
   app.use(express.urlencoded({ extended: true }));
 
   connectDB();
+
+  app.use("/api/auth", userRouter);
 
   server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
