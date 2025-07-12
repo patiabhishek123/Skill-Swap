@@ -1,0 +1,11 @@
+
+import mongoose,{Schema} from "mongoose";
+import jwt from "jsonwebtoken"
+const reportLogSchema = new Schema({
+  adminId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  reportType: { type: String },
+  filePath: { type: String },
+  generatedAt: { type: Date, default: Date.now }
+});
+
+module.exports = mongoose.model('ReportLog', reportLogSchema);
